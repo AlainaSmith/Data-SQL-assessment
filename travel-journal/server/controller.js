@@ -26,8 +26,8 @@ module.exports = {
         let {name, rating, countryId} = req.body
         sequelize.query(`
         INSERT INTO cities (name, rating, country_Id)
-        VALUES ('${name}', ${rating}, ${countryId})
-        `)
+        VALUES ('${name}', '${rating}', '${countryId}')
+        ;`)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
@@ -39,7 +39,7 @@ module.exports = {
         JOIN countries co
         ON country_id = ci.country_id
         ORDER BY ci.rating DESC;
-        `)
+        ;`)
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
     },
@@ -48,7 +48,7 @@ module.exports = {
         const {id} = req.params
         sequelize.query(`
         DELETE FROM cities
-        WHERE city_id = ${id}`)
+        WHERE city_id = '${id}';`)
 
         .then(dbRes => res.status(200).send(dbRes[0]))
         .catch(err => console.log(err))
